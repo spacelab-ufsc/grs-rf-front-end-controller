@@ -1,6 +1,6 @@
 import zmq
 import RPi.GPIO as GPIO
-from read_sensor import *
+from read_sensor import return_telemetry
 
 GPIO.setmode(GPIO.BCM)
 
@@ -67,7 +67,7 @@ def toggle_s_band(state):
         GPIO.output(pin_lna_s_band, GPIO.LOW)
 
 def get_telemetry():
-    return read_sensors()
+    return return_telemetry()
 
 def interpret_command():
     """
