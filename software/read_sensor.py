@@ -5,13 +5,13 @@ Format of the returned string:
         "LNA" : {
             "power" : power_lna_vhf,
             "current" : current_lna_vhf,
-            "voltage" : vultage_lna_vhf,
+            "voltage" : voltage_lna_vhf,
             "temperature" : temperature_lna_vhf
         },
         "PA"  : {
             "power" : power_pa_vhf,
             "current" : current_pa_vhf,
-            "voltage" : vultage_pa_vhf,
+            "voltage" : voltage_pa_vhf,
             "temperature" : temperature_pa_vhf
         }
         },
@@ -19,13 +19,13 @@ Format of the returned string:
         "LNA" : {
             "power" : power_lna_uhf400,
             "current" : current_lna_uhf400,
-            "voltage" : vultage_lna_uhf400,
+            "voltage" : voltage_lna_uhf400,
             "temperature" : temperature_lna_uhf400
         },
         "PA" : {
             "power" : power_pa_uhf400,
             "current" : current_pa_uhf400,
-            "voltage" : vultage_pa_uhf400,
+            "voltage" : voltage_pa_uhf400,
             "temperature" : temperature_pa_uhf400
         }
     },
@@ -33,7 +33,7 @@ Format of the returned string:
         "LNA" : {
             "power" : power_lna_uhf468,
             "current" : current_lna_uhf468,
-            "voltage" : vultage_lna_uhf468,
+            "voltage" : voltage_lna_uhf468,
             "temperature" : temperature_lna_uhf468
         } 
     },
@@ -41,7 +41,7 @@ Format of the returned string:
         "LNA" : {
             "power" : power_lna_sband,
             "current" : current_lna_sband,
-            "voltage" : vultage_lna_sband,
+            "voltage" : voltage_lna_sband,
             "temperature" : temperature_lna_sband
         } 
     }
@@ -89,12 +89,12 @@ def return_telemetry():
             readings.append(read_sensor_object(sensor))
         except Exception as e:
             print(f"Error: {e}")
-            sys.exit(1)
+            readings.append({"power": None, "current": None, "voltage": None, "temperature": None})
 
     json_readings = {"vhf" : {"LNA" : readings[0], "PA" : readings[1]},
                      "uhf_400" : {"LNA" : readings[2], "PA" : readings[3]},
                      "uhf_468" : {"LNA" : readings[4]},
                      "s_band" : {"LNA" : readings[5]}
                      }
-    
+
     return json_readings
